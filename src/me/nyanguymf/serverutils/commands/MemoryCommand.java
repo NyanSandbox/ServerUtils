@@ -1,0 +1,58 @@
+/**
+ * MemoryCommand.java 2019-01-11
+ * 
+ * @author NyanGuyMF
+ * 
+ * @version 1.0
+ */
+package me.nyanguymf.serverutils.commands;
+
+import org.bukkit.command.CommandSender;
+
+import me.nyanguymf.serverutils.managers.MessagesManager;
+import me.nyanguymf.serverutils.utils.StringUtils;
+
+/**
+ * @author nyanguymf
+ *
+ */
+class MemoryCommand extends Command {
+    public MemoryCommand(String permission, String command) {
+        super(permission, command);
+    }
+
+    /**
+     * Displays memory usage information.
+     */
+    @Override
+    public void execute(CommandSender sender, boolean permission) {
+        if (!sender.hasPermission(super.permission)) {
+            super.sendNoPermission(sender);
+            return;
+        }
+
+        long freeMemory         = Runtime.getRuntime().freeMemory() / 1024 / 1024;
+        long availableMemory    = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+        long maxMemory          = Runtime.getRuntime().maxMemory() / 1024 / 1024;
+        long usedMemory         = availableMemory - freeMemory;
+
+        sender.sendMessage(new String[] {
+            StringUtils.replaceVarColored(
+                MessagesManager.getInstance().getMessage("mem-free"),
+                String.valueOf(freeMemory)
+            ),
+            StringUtils.replaceVarColored(
+                MessagesManager.getInstance().getMessage("mem-used"),
+                String.valueOf(usedMemory)
+            ),
+            StringUtils.replaceVarColored(
+                MessagesManager.getInstance().getMessage("mem-total"),
+                String.valueOf(availableMemory)
+            ),
+            StringUtils.replaceVarColored(
+                MessagesManager.getInstance().getMessage("mem-max"),
+                String.valueOf(maxMemory)
+            )
+        });
+    }
+}

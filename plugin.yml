@@ -1,0 +1,10 @@
+name: ServerUtils
+main: me.nyanguymf.serverutils.ServerUtils
+author: NyanGuyMF
+
+version: 0.1
+
+commands:
+  serverutils:
+    description: 'Main command'
+    aliases: ['su']

@@ -1,0 +1,13 @@
+tps: '&eTPS: &b{0}&e.'
+monsters: '&eMonsters: &b{0}&e.'
+animals: '&eAnimals: &b{0}&e.'
+gc: '&eGarbage collector called.'
+mem-free: '&eFree memory: &b{0} MB&e.'
+mem-used: '&eMemory in use: &b{0} MB&e.'
+mem-total: '&eTotal memory: &b{0} MB&e.'
+mem-max: '&eMax memory: &b{0} MB&e.'
+world: '&e{0}: &b{1} &echunks&e, &b{2} &eentities.'
+
+reload: '&3ServerUtils &8» &ePlugin successfuly reloaded.'
+
+no-permission: '&cYou don''t have permission to perform &6/{0}&c command.'
