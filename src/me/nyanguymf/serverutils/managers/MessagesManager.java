@@ -16,39 +16,22 @@ import me.nyanguymf.serverutils.utils.StringUtils;
 
 /**
  * @author nyanguymf
- *
- * Singleton pattern.
  */
 public class MessagesManager {
     private YamlConfiguration   config;
-    
-    private static MessagesManager instance;
 
     /**
      * Plugin's main class instance;
      */
     private ServerUtils plugin;
 
-    private MessagesManager() {
-        plugin   = ServerUtils.getInstance();
-        instance = this;
+    private MessagesManager(ServerUtils plugin) {
+        this.plugin = plugin;
 
         File    configFile  = new File(plugin.getDataFolder(), "messages.yml");
                 config      = YamlConfiguration.loadConfiguration(configFile);
 
         plugin.saveResource(configFile.getName(), true); // true to false
-    }
-
-    /**
-     * Typical singleton fabric method.
-     *
-     * @return instance.
-     */
-    public static MessagesManager getInstance() {
-        if (instance != null)
-            return instance;
-        else
-            return new MessagesManager();
     }
 
     /**

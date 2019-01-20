@@ -16,9 +16,12 @@ import me.nyanguymf.serverutils.managers.MessagesManager;
  *
  */
 class ReloadCommand extends Command {
+    private MessagesManager mm;
 
-    public ReloadCommand(String permission, String command) {
+    public ReloadCommand(String permission, String command, MessagesManager mm) {
         super(permission, command);
+
+        this.mm = mm;
     }
 
     /**
@@ -26,8 +29,6 @@ class ReloadCommand extends Command {
      */
     @Override
     public void execute(CommandSender sender, boolean permission) {
-        MessagesManager mm = MessagesManager.getInstance();
-
         mm.reload();
 
         sender.sendMessage(mm.getColoredMessage("reload"));

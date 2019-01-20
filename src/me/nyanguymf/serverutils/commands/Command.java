@@ -9,7 +9,6 @@ package me.nyanguymf.serverutils.commands;
 
 import org.bukkit.command.CommandSender;
 
-import me.nyanguymf.serverutils.managers.MessagesManager;
 import me.nyanguymf.serverutils.utils.StringUtils;
 
 /**
@@ -49,8 +48,7 @@ abstract class Command {
      *
      * @param cmd Command not authorized to perform.
      */
-    protected void sendNoPermission(CommandSender reciever) {
-        String format   = MessagesManager.getInstance().getColoredMessage("no-permission");
+    protected void sendNoPermission(CommandSender reciever, String format) {
         String message  = StringUtils.replaceVarColored(format, command);
 
         reciever.sendMessage(message);

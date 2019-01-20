@@ -26,10 +26,14 @@ import me.nyanguymf.serverutils.utils.StringUtils;
  *
  */
 class MobsCommand extends Command {
-    private static ServerUtils su = ServerUtils.getInstance();
+    private ServerUtils     su;
+    private MessagesManager mm;
 
-    public MobsCommand(String permission, String command) {
+    public MobsCommand(String permission, String command, ServerUtils plugin, MessagesManager mm) {
         super(permission, command);
+
+        su      = plugin;
+        this.mm = mm;
     }
 
     /**
@@ -39,16 +43,16 @@ class MobsCommand extends Command {
     @Override
     public void execute(CommandSender sender, boolean permissionAll) {
         if (!sender.hasPermission(super.permission) && !permissionAll) {
-            super.sendNoPermission(sender);
+            super.sendNoPermission(sender, mm.getColoredMessage("no-permission"));
             return;
         }
 
         Map<String, Integer> mobsCount = getMobsCount();
 
-        String  monsters = MessagesManager.getInstance().getMessage("monsters");
+        String  monsters = mm.getMessage("monsters");
                 monsters = StringUtils.replaceVarColored(monsters, String.valueOf(mobsCount.get("monsters")));
 
-        String  animals = MessagesManager.getInstance().getMessage("animals");
+        String  animals = mm.getMessage("animals");
                 animals = StringUtils.replaceVarColored(animals, String.valueOf(mobsCount.get("animals")));
 
         sender.sendMessage(new String[] {animals, monsters});
@@ -60,7 +64,7 @@ class MobsCommand extends Command {
      * @return Map, where key is entity object name (animal/monster)
      * and value is count.
      */
-    private static Map<String, Integer> getMobsCount() {
+    private Map<String, Integer> getMobsCount() {
         int monstersCount   = 0;
         int animalsCount    = 0;
 

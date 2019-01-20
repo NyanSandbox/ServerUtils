@@ -15,6 +15,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import me.nyanguymf.serverutils.ServerUtils;
+import me.nyanguymf.serverutils.managers.MessagesManager;
 
 /**
  * @author nyanguymf
@@ -23,16 +24,16 @@ import me.nyanguymf.serverutils.ServerUtils;
 public class SUCommand implements CommandExecutor {
     private MobsCommand     mobs;
     private GCCommand       gc;
-    private TPSCommand      tps;
     private MemoryCommand   mem;
     private ReloadCommand   reload;
+    private TPSCommand      tps;
 
-    public SUCommand() {
-        mobs    = new MobsCommand("serverutils.mobs", "su mobs");
-        gc      = new GCCommand("serverutils.gc", "su gc");
-        tps     = ServerUtils.getTPSCommand();
-        mem     = new MemoryCommand("serverutils.mem", "su memory");
-        reload  = new ReloadCommand("serverutils.reload", "su reload");
+    public SUCommand(ServerUtils plugin, MessagesManager mm) {
+        mobs    = new MobsCommand("serverutils.mobs", "su mobs", plugin, mm);
+        gc      = new GCCommand("serverutils.gc", "su gc", plugin, mm);
+        tps     = new TPSCommand("serverutils.tps", "su tps", plugin, mm);
+        mem     = new MemoryCommand("serverutils.mem", "su memory", mm);
+        reload  = new ReloadCommand("serverutils.reload", "su reload", mm);
     }
 
     /**
