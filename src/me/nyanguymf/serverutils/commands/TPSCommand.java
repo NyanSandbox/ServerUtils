@@ -27,18 +27,16 @@ class TPSCommand extends Command {
     private LagMeterStack   history;
     private LagMeterPoller  poller;
     private ServerUtils     su;
-    private MessagesManager mm;
 
     /** init scheduler for TPS */
     public TPSCommand(String permission, String command, ServerUtils plugin, MessagesManager mm) {
-        super(permission, command);
+        super(permission, command, mm);
 
         ticksPerSecond  = 20;
         useAverage      = true;
         averageLength   = 10;
         interval        = 40;
         this.su         = plugin;
-        this.mm         = mm;
         history         = new LagMeterStack();
         poller          = new LagMeterPoller(this);
 
@@ -56,12 +54,12 @@ class TPSCommand extends Command {
     @Override
     public void execute(CommandSender sender, boolean permissionAll) {
         if (!sender.hasPermission(super.permission) && !permissionAll) {
-            super.sendNoPermission(sender, mm.getColoredMessage("no-permission"));
+            super.sendNoPermission(sender);
             return;
         }
 
         String tps     = getTPS();
-        String message = mm.getMessage("tps");
+        String message = super.mm.getMessage("tps");
 
         sender.sendMessage(StringUtils.replaceVarColored(message, tps));
     }

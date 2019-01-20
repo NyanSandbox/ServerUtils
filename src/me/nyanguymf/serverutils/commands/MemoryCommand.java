@@ -17,12 +17,9 @@ import me.nyanguymf.serverutils.utils.StringUtils;
  *
  */
 class MemoryCommand extends Command {
-    private MessagesManager mm;
 
     public MemoryCommand(String permission, String command, MessagesManager mm) {
-        super(permission, command);
-
-        this.mm = mm;
+        super(permission, command, mm);
     }
 
     /**
@@ -31,7 +28,7 @@ class MemoryCommand extends Command {
     @Override
     public void execute(CommandSender sender, boolean permission) {
         if (!sender.hasPermission(super.permission)) {
-            super.sendNoPermission(sender, mm.getColoredMessage("no-permission"));
+            super.sendNoPermission(sender);
             return;
         }
 
@@ -42,19 +39,19 @@ class MemoryCommand extends Command {
 
         sender.sendMessage(new String[] {
             StringUtils.replaceVarColored(
-                mm.getMessage("mem-free"),
+                    super.mm.getMessage("mem-free"),
                 String.valueOf(freeMemory)
             ),
             StringUtils.replaceVarColored(
-                mm.getMessage("mem-used"),
+                    super.mm.getMessage("mem-used"),
                 String.valueOf(usedMemory)
             ),
             StringUtils.replaceVarColored(
-                mm.getMessage("mem-total"),
+                    super.mm.getMessage("mem-total"),
                 String.valueOf(availableMemory)
             ),
             StringUtils.replaceVarColored(
-                mm.getMessage("mem-max"),
+                    super.mm.getMessage("mem-max"),
                 String.valueOf(maxMemory)
             )
         });

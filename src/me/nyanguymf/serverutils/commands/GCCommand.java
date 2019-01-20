@@ -22,13 +22,11 @@ import me.nyanguymf.serverutils.utils.StringUtils;
  */
 class GCCommand extends Command {
     private ServerUtils     su;
-    private MessagesManager mm;
 
     public GCCommand(String permission, String command, ServerUtils plugin, MessagesManager mm) {
-        super(permission, command);
+        super(permission, command, mm);
 
-        su      = plugin;
-        this.mm = mm;
+        su = plugin;
     }
 
     /**
@@ -42,7 +40,7 @@ class GCCommand extends Command {
     @Override
     public void execute(CommandSender sender, boolean permissionAll) {
         if (!sender.hasPermission(super.permission) && !permissionAll) {
-            super.sendNoPermission(sender, mm.getColoredMessage("no-permission"));
+            super.sendNoPermission(sender);
             return;
         }
 
@@ -50,7 +48,7 @@ class GCCommand extends Command {
 
         List<World> worlds  = su.getServer().getWorlds();
         String[]    message = new String[worlds.size()];
-        String      format  = mm.getColoredMessage("world");
+        String      format  = super.mm.getColoredMessage("world");
 
         for (int c = 0; c < worlds.size(); c++) {
             World world = worlds.get(c);
@@ -73,7 +71,7 @@ class GCCommand extends Command {
      * @param sender CommandSender to send message.
      */
     private void callGC(CommandSender sender) {
-        String message = mm.getColoredMessage("gc");
+        String message = super.mm.getColoredMessage("gc");
 
         System.gc();
 

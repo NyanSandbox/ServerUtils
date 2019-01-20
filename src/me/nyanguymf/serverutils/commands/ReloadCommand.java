@@ -16,12 +16,9 @@ import me.nyanguymf.serverutils.managers.MessagesManager;
  *
  */
 class ReloadCommand extends Command {
-    private MessagesManager mm;
 
     public ReloadCommand(String permission, String command, MessagesManager mm) {
-        super(permission, command);
-
-        this.mm = mm;
+        super(permission, command, mm);
     }
 
     /**

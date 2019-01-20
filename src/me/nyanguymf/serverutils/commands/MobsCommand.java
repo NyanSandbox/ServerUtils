@@ -26,14 +26,12 @@ import me.nyanguymf.serverutils.utils.StringUtils;
  *
  */
 class MobsCommand extends Command {
-    private ServerUtils     su;
-    private MessagesManager mm;
+    private ServerUtils su;
 
     public MobsCommand(String permission, String command, ServerUtils plugin, MessagesManager mm) {
-        super(permission, command);
+        super(permission, command, mm);
 
-        su      = plugin;
-        this.mm = mm;
+        su = plugin;
     }
 
     /**
@@ -43,16 +41,16 @@ class MobsCommand extends Command {
     @Override
     public void execute(CommandSender sender, boolean permissionAll) {
         if (!sender.hasPermission(super.permission) && !permissionAll) {
-            super.sendNoPermission(sender, mm.getColoredMessage("no-permission"));
+            super.sendNoPermission(sender);
             return;
         }
 
         Map<String, Integer> mobsCount = getMobsCount();
 
-        String  monsters = mm.getMessage("monsters");
+        String  monsters = super.mm.getMessage("monsters");
                 monsters = StringUtils.replaceVarColored(monsters, String.valueOf(mobsCount.get("monsters")));
 
-        String  animals = mm.getMessage("animals");
+        String  animals = super.mm.getMessage("animals");
                 animals = StringUtils.replaceVarColored(animals, String.valueOf(mobsCount.get("animals")));
 
         sender.sendMessage(new String[] {animals, monsters});
