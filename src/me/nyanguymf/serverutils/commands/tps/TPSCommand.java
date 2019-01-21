@@ -5,12 +5,13 @@
  * 
  * @version 1.0
  */
-package me.nyanguymf.serverutils.commands;
+package me.nyanguymf.serverutils.commands.tps;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import me.nyanguymf.serverutils.ServerUtils;
+import me.nyanguymf.serverutils.commands.Command;
 import me.nyanguymf.serverutils.managers.MessagesManager;
 import me.nyanguymf.serverutils.utils.StringUtils;
 
@@ -19,7 +20,7 @@ import me.nyanguymf.serverutils.utils.StringUtils;
  *
  * @author DemmyDemon https://github.com/DemmyDemon/LagMeter
  */
-class TPSCommand extends Command {
+public class TPSCommand extends Command {
     private float           ticksPerSecond;
     private boolean         useAverage;
     private int             averageLength;
@@ -52,16 +53,15 @@ class TPSCommand extends Command {
      * https://github.com/DemmyDemon/LagMeter
      */
     @Override
-    public void execute(CommandSender sender, boolean permissionAll) {
-        if (!sender.hasPermission(super.permission) && !permissionAll) {
-            super.sendNoPermission(sender);
-            return;
-        }
+    public boolean execute(CommandSender sender, boolean permissionAll, String... args) {
+        if (!super.execute(sender, permissionAll)) return false;
 
         String tps     = getTPS();
         String message = super.mm.getMessage("tps");
 
         sender.sendMessage(StringUtils.replaceVarColored(message, tps));
+
+        return true;
     }
 
 

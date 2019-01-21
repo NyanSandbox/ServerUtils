@@ -5,7 +5,7 @@
  * 
  * @version 1.0
  */
-package me.nyanguymf.serverutils.commands;
+package me.nyanguymf.serverutils.commands.tps;
 
 import java.util.LinkedList;
 
