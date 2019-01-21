@@ -7,74 +7,34 @@
  */
 package me.nyanguymf.serverutils.commands;
 
-import java.util.List;
-
-import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 
-import me.nyanguymf.serverutils.ServerUtils;
 import me.nyanguymf.serverutils.managers.MessagesManager;
-import me.nyanguymf.serverutils.utils.StringUtils;
 
 /**
  * @author nyanguymf
  *
  */
 class GCCommand extends Command {
-    private ServerUtils     su;
 
-    public GCCommand(String permission, String command, ServerUtils plugin, MessagesManager mm) {
+    public GCCommand(String permission, String command, MessagesManager mm) {
         super(permission, command, mm);
-
-        su = plugin;
-    }
-
-    /**
-     * Call to the Garbage Collector and
-     * considers loaded chunks and entities
-     * for each server's world.
-     *
-     * As response send message with this info
-     * to command sender.
-     */
-    @Override
-    public void execute(CommandSender sender, boolean permissionAll) {
-        if (!sender.hasPermission(super.permission) && !permissionAll) {
-            super.sendNoPermission(sender);
-            return;
-        }
-
-        callGC(sender);
-
-        List<World> worlds  = su.getServer().getWorlds();
-        String[]    message = new String[worlds.size()];
-        String      format  = super.mm.getColoredMessage("world");
-
-        for (int c = 0; c < worlds.size(); c++) {
-            World world = worlds.get(c);
-
-            message[c]  = StringUtils.replaceVariables(
-                    format, new String[] {
-                    world.getName(),
-                    String.valueOf(world.getLoadedChunks().length),
-                    String.valueOf(world.getEntities().size())
-                });
-        }
-
-        sender.sendMessage(message);
     }
 
     /**
      * Ask garbage collector: "Please, respectful GC, collect all
      * the garbage".
-     *
-     * @param sender CommandSender to send message.
      */
-    private void callGC(CommandSender sender) {
+    @Override
+    public boolean execute(CommandSender sender, boolean permissionAll, String... args) {
+        if (!super.execute(sender, permissionAll)) return false;
+
         String message = super.mm.getColoredMessage("gc");
 
         System.gc();
 
         sender.sendMessage(message);
+
+        return true;
     }
 }
