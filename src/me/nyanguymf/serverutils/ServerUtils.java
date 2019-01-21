@@ -21,7 +21,8 @@ public class ServerUtils extends JavaPlugin {
     private MessagesManager mm;
 
     public void onEnable() {
-        instance = this;
+        instance    = this;
+        mm          = new MessagesManager(instance);
 
         getCommand("serverutils").setExecutor(new SUCommand(instance, mm));
         getCommand("serverutils").setTabCompleter(new TabCompleter());

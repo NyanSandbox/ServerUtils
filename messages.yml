@@ -7,7 +7,38 @@ mem-used: '&eMemory in use: &b{0} MB&e.'
 mem-total: '&eTotal memory: &b{0} MB&e.'
 mem-max: '&eMax memory: &b{0} MB&e.'
 world: '&e{0}: &b{1} &echunks&e, &b{2} &eentities.'
+world-time: '&e{0}: &b{1}'
+uptime: '&eServer uptime:&b {0}'
+
+player:
+  words:
+    'true': '&atrue'
+    'false': '&cfalse'
+    creative: '&aCreative'
+    survival: '&bSurvival'
+    spectator: '&7Spectrator'
+    adventure: '&dAdventure'
+  stats:
+    header: '&ePlayer «&b{0}&e»'
+    op: '&eOP: {0}'
+    uuid: '&eUUID: &b{0}'
+    hp: '&eHP: {0}'
+    ip: '&eIP: &b{0}'
+    exp: '&eExp for next level: &b{0}'
+    level: '&eLvL: &b{0}'
+    food: '&eFood: &b{0}'
+    exhaustion: '&eExhaustion: &b{0}'
+    gamemode: '&eGamemode: &b{0}'
+    fly: '&eFly: {0}'
+    world: '&eWorld: &b{0}'
+    coord: '&eCoordinates: &cx: &6{0} &cy: &6{1} &cz: &6{2} &cyaw:&6 {3}'
+
 
 reload: '&3ServerUtils &8» &ePlugin successfuly reloaded.'
 
+usage:
+  player: '&3ServerUtils &8» &eUse &c/su &6«player» &6[specific stat]'
+
 no-permission: '&cYou don''t have permission to perform &6/{0}&c command.'
+player-not-found: '&cPlayer &6«{0}»&c not found.'
+world-not-found: '&cWorld &6«{0}»&c not found. Be careful, this command is case sensitive.'

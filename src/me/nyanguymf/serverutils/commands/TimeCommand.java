@@ -1,5 +1,5 @@
 /**
- * ReloadCommand.java 2019-01-11
+ * TimeCommand.java 2019-01-20
  * 
  * @author NyanGuyMF
  * 
@@ -15,23 +15,16 @@ import me.nyanguymf.serverutils.managers.MessagesManager;
  * @author nyanguymf
  *
  */
-class ReloadCommand extends Command {
+class TimeCommand extends Command {
 
-    public ReloadCommand(String permission, String command, MessagesManager mm) {
+    public TimeCommand(String permission, String command, MessagesManager mm) {
         super(permission, command, mm);
     }
 
-    /**
-     * Reloads plugin's messages.
-     */
     @Override
     public boolean execute(CommandSender sender, boolean permission, String... args) {
         if (!super.execute(sender, permission)) return false;
-        mm.reload();
-
-        sender.sendMessage(mm.getColoredMessage("reload"));
 
         return true;
     }
-
 }

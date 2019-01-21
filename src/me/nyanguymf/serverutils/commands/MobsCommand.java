@@ -39,11 +39,8 @@ class MobsCommand extends Command {
      * send it as message to command sender.
      */
     @Override
-    public void execute(CommandSender sender, boolean permissionAll) {
-        if (!sender.hasPermission(super.permission) && !permissionAll) {
-            super.sendNoPermission(sender);
-            return;
-        }
+    public boolean execute(CommandSender sender, boolean permissionAll, String... args) {
+        if (!super.execute(sender, permissionAll)) return false;
 
         Map<String, Integer> mobsCount = getMobsCount();
 
@@ -54,6 +51,8 @@ class MobsCommand extends Command {
                 animals = StringUtils.replaceVarColored(animals, String.valueOf(mobsCount.get("animals")));
 
         sender.sendMessage(new String[] {animals, monsters});
+
+        return true;
     }
 
     /**

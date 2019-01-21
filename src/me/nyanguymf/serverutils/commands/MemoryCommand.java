@@ -26,11 +26,8 @@ class MemoryCommand extends Command {
      * Displays memory usage information.
      */
     @Override
-    public void execute(CommandSender sender, boolean permission) {
-        if (!sender.hasPermission(super.permission)) {
-            super.sendNoPermission(sender);
-            return;
-        }
+    public boolean execute(CommandSender sender, boolean permission, String... args) {
+        if (!super.execute(sender, permission)) return false;
 
         long freeMemory         = Runtime.getRuntime().freeMemory() / 1024 / 1024;
         long availableMemory    = Runtime.getRuntime().totalMemory() / 1024 / 1024;
@@ -55,5 +52,7 @@ class MemoryCommand extends Command {
                 String.valueOf(maxMemory)
             )
         });
+
+        return true;
     }
 }

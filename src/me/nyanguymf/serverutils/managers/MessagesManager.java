@@ -9,6 +9,7 @@ package me.nyanguymf.serverutils.managers;
 
 import java.io.File;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import me.nyanguymf.serverutils.ServerUtils;
@@ -25,13 +26,15 @@ public class MessagesManager {
      */
     private ServerUtils plugin;
 
-    private MessagesManager(ServerUtils plugin) {
+    public MessagesManager(ServerUtils plugin) {
         this.plugin = plugin;
 
         File    configFile  = new File(plugin.getDataFolder(), "messages.yml");
                 config      = YamlConfiguration.loadConfiguration(configFile);
 
-        plugin.saveResource(configFile.getName(), true); // true to false
+        plugin.saveResource(configFile.getName(), true); // TODO: true to false
+
+        reload();
     }
 
     /**
@@ -51,6 +54,19 @@ public class MessagesManager {
      */
     public String getColoredMessage(String path) {
         return StringUtils.replaceColors(getMessage(path));
+    }
+
+    /**
+     * Return configuration section form messages file.
+     *
+     * @param Path to configuration section in configuration file.
+     *
+     * @return ConfigurationSection.
+     *
+     * @since 1.2.
+     */
+    public ConfigurationSection getSection(String path) {
+        return config.getConfigurationSection(path);
     }
 
     /**

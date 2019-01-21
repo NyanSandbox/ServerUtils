@@ -16,7 +16,7 @@ import me.nyanguymf.serverutils.utils.StringUtils;
  * @author nyanguymf
  *
  */
-abstract class Command {
+public abstract class Command {
     /**
      * Command's permission to launch command.
      */
@@ -38,11 +38,23 @@ abstract class Command {
     /**
      * Executes command.
      *
+     * Check player's permission.
+     *
      * @param sender Command sender.
      *
      * @param permission Does the sender have all permissions.
+     *
+     * @param args Unnecessary command arguments depend on implementation.
+     * @return TODO
      */
-    public abstract void execute(CommandSender sender, boolean permission);
+    protected boolean execute(CommandSender sender, boolean permission, String... args) {
+        if (!sender.hasPermission(this.permission) && !permission) {
+            this.sendNoPermission(sender);
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * Tells to command sender that he has no
