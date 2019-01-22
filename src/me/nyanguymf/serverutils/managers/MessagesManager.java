@@ -9,6 +9,7 @@ package me.nyanguymf.serverutils.managers;
 
 import java.io.File;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import me.nyanguymf.serverutils.ServerUtils;
@@ -16,39 +17,33 @@ import me.nyanguymf.serverutils.utils.StringUtils;
 
 /**
  * @author nyanguymf
- *
- * Singleton pattern.
  */
 public class MessagesManager {
     private YamlConfiguration   config;
-    
-    private static MessagesManager instance;
 
     /**
      * Plugin's main class instance;
      */
     private ServerUtils plugin;
 
-    private MessagesManager() {
-        plugin   = ServerUtils.getInstance();
-        instance = this;
+    public MessagesManager(ServerUtils plugin) {
+        this.plugin = plugin;
 
         File    configFile  = new File(plugin.getDataFolder(), "messages.yml");
                 config      = YamlConfiguration.loadConfiguration(configFile);
 
-        plugin.saveResource(configFile.getName(), true); // true to false
-    }
+        boolean override = false;
 
-    /**
-     * Typical singleton fabric method.
-     *
-     * @return instance.
-     */
-    public static MessagesManager getInstance() {
-        if (instance != null)
-            return instance;
-        else
-            return new MessagesManager();
+        if (config.isSet("version")) {
+            if (!config.getString("version").equals(plugin.getDescription().getVersion()))
+                override = true;
+        } else {
+            override = true;
+        }
+
+        plugin.saveResource(configFile.getName(), override); // TODO: true to false
+
+        reload();
     }
 
     /**
@@ -68,6 +63,19 @@ public class MessagesManager {
      */
     public String getColoredMessage(String path) {
         return StringUtils.replaceColors(getMessage(path));
+    }
+
+    /**
+     * Return configuration section form messages file.
+     *
+     * @param Path to configuration section in configuration file.
+     *
+     * @return ConfigurationSection.
+     *
+     * @since 1.2.
+     */
+    public ConfigurationSection getSection(String path) {
+        return config.getConfigurationSection(path);
     }
 
     /**

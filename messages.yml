@@ -1,13 +1,53 @@
+version: '1.2'
+
 tps: '&eTPS: &b{0}&e.'
 monsters: '&eMonsters: &b{0}&e.'
 animals: '&eAnimals: &b{0}&e.'
 gc: '&eGarbage collector called.'
-mem-free: '&eFree memory: &b{0} MB&e.'
-mem-used: '&eMemory in use: &b{0} MB&e.'
-mem-total: '&eTotal memory: &b{0} MB&e.'
-mem-max: '&eMax memory: &b{0} MB&e.'
 world: '&e{0}: &b{1} &echunks&e, &b{2} &eentities.'
+system-time: '&aSystem time: &b{month}&3:&b{day} {hour}&3:&b{min}&3:&b{sec}&e.'
+uptime: '&eServer uptime:&b {0}&e.'
+
+memory:
+  free: '&eFree memory: &b{0} MB&e.'
+  used: '&eMemory in use: &b{0} MB&e.'
+  total: '&eTotal memory: &b{0} MB&e.'
+  max: '&eMax memory: &b{0} MB&e.'
+
+cpu:
+  java: '&eJava CPU usage: &b{0}%&e.'
+  system: '&eSystem CPU usage: &b{0}%&e.'
+  average: '&eAverage CPU usage: &b{0}%&e.'
+
+player:
+  words:
+    'true': '&atrue'
+    'false': '&cfalse'
+    creative: '&aCreative'
+    survival: '&bSurvival'
+    spectator: '&7Spectrator'
+    adventure: '&dAdventure'
+  stats:
+    header: '&ePlayer «&b{0}&e»'
+    op: '&eOP: {0}&e.'
+    uuid: '&eUUID: &b{0}&e.'
+    hp: '&eHP: {0}&e.'
+    ip: '&eIP: &b{0}&e.'
+    exp: '&eExp for next level: &b{0}&e.'
+    level: '&eLvL: &b{0}&e.'
+    food: '&eFood: &b{0}&e.'
+    exhaustion: '&eExhaustion: &b{0}&e.'
+    gamemode: '&eGamemode: &b{0}&e.'
+    fly: '&eFly: {0}&e.'
+    world: '&eWorld: &b{0}&e.'
+    coord: '&eCoordinates: &cx: &6{0} &cy: &6{1} &cz: &6{2} &cyaw:&6 {3}&e.'
+
 
 reload: '&3ServerUtils &8» &ePlugin successfuly reloaded.'
 
+usage:
+  player: '&3ServerUtils &8» &eUse &c/su &6«player» &6[specific stat]'
+
 no-permission: '&cYou don''t have permission to perform &6/{0}&c command.'
+player-not-found: '&cPlayer &6«{0}»&c not found.'
+world-not-found: '&cWorld &6«{0}»&c not found. Be careful, this command is case sensitive.'

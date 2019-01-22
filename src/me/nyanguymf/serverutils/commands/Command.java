@@ -16,7 +16,7 @@ import me.nyanguymf.serverutils.utils.StringUtils;
  * @author nyanguymf
  *
  */
-abstract class Command {
+public abstract class Command {
     /**
      * Command's permission to launch command.
      */
@@ -24,22 +24,37 @@ abstract class Command {
 
     protected String command;
 
+    protected MessagesManager mm;
+
     /**
      * Creates new command with given permission.
      */
-    public Command(String permission, String command) {
+    public Command(String permission, String command, MessagesManager mm) {
         this.permission = permission;
         this.command    = command;
+        this.mm         = mm;
     }
 
     /**
      * Executes command.
      *
+     * Check player's permission.
+     *
      * @param sender Command sender.
      *
      * @param permission Does the sender have all permissions.
+     *
+     * @param args Unnecessary command arguments depend on implementation.
+     * @return TODO
      */
-    public abstract void execute(CommandSender sender, boolean permission);
+    protected boolean execute(CommandSender sender, boolean permission, String... args) {
+        if (!sender.hasPermission(this.permission) && !permission) {
+            this.sendNoPermission(sender);
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * Tells to command sender that he has no
@@ -50,7 +65,7 @@ abstract class Command {
      * @param cmd Command not authorized to perform.
      */
     protected void sendNoPermission(CommandSender reciever) {
-        String format   = MessagesManager.getInstance().getColoredMessage("no-permission");
+        String format   = mm.getColoredMessage("no-permission");
         String message  = StringUtils.replaceVarColored(format, command);
 
         reciever.sendMessage(message);

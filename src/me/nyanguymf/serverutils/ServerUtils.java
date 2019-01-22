@@ -10,22 +10,21 @@ package me.nyanguymf.serverutils;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.nyanguymf.serverutils.commands.SUCommand;
-import me.nyanguymf.serverutils.commands.TPSCommand;
 import me.nyanguymf.serverutils.commands.TabCompleter;
+import me.nyanguymf.serverutils.managers.MessagesManager;
 
 /**
  * @author nyanguymf
  */
 public class ServerUtils extends JavaPlugin {
-    private static ServerUtils instance;
-
-    private static TPSCommand TPSCommand;
+    private ServerUtils     instance;
+    private MessagesManager mm;
 
     public void onEnable() {
         instance    = this;
-        TPSCommand  = new TPSCommand("serverutils.tps", "su tps");
+        mm          = new MessagesManager(instance);
 
-        getCommand("serverutils").setExecutor(new SUCommand());
+        getCommand("serverutils").setExecutor(new SUCommand(instance, mm));
         getCommand("serverutils").setTabCompleter(new TabCompleter());
 
         getLogger().info("Plugin enabled.");
@@ -35,23 +34,5 @@ public class ServerUtils extends JavaPlugin {
         getServer().getScheduler().cancelTasks(this);
 
         getLogger().info("Plugin disabled.");
-    }
-
-    /**
-     * Gets main plugin's class object.
-     *
-     * @return Plugin instance.
-     */
-    public static ServerUtils getInstance() {
-        return instance;
-    }
-
-    /**
-     * Gets TPSCommand object.
-     *
-     * @return TPSCommand object
-     */
-    public static TPSCommand getTPSCommand() {
-        return TPSCommand;
     }
 }

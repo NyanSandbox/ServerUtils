@@ -5,17 +5,26 @@
  * 
  * @version 1.0
  */
-package me.nyanguymf.serverutils.commands;
+package me.nyanguymf.serverutils.commands.tps;
 
 /**
  * @author nyanguymf
  *
  */
 class LagMeterPoller implements Runnable {
-    private long lastPoll   = System.currentTimeMillis() - 3000;
+    private long        lastPoll;
+    private int         interval;
+    private TPSCommand  tpsCmd;
+
     @SuppressWarnings("unused")
-    private long polls      = 0;
-    private int  interval   = 40;
+    private long        polls;
+
+    public LagMeterPoller(TPSCommand tpsCmd) {
+        lastPoll    = System.currentTimeMillis() - 3000;
+        polls       = 0;
+        interval    = 40;
+        this.tpsCmd = tpsCmd;
+    }
 
     @Override
     public void run() {
@@ -27,11 +36,10 @@ class LagMeterPoller implements Runnable {
 
         float tps = interval / timeSpent;
 
-        TPSCommand.ticksPerSecond = tps;
-        TPSCommand.history.add(tps);
+        tpsCmd.setTicksPerSecond(tps);
+        tpsCmd.getHistory().add(tps);
 
         lastPoll = now;
         polls++;
     }
-
 }
