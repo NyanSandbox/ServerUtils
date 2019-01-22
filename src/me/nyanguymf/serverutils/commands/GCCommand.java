@@ -8,7 +8,9 @@
 package me.nyanguymf.serverutils.commands;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import me.nyanguymf.serverutils.ServerUtils;
 import me.nyanguymf.serverutils.managers.MessagesManager;
 
 /**
@@ -16,9 +18,12 @@ import me.nyanguymf.serverutils.managers.MessagesManager;
  *
  */
 class GCCommand extends Command {
+    private ServerUtils plugin;
 
-    public GCCommand(String permission, String command, MessagesManager mm) {
+    public GCCommand(String permission, String command, ServerUtils plugin, MessagesManager mm) {
         super(permission, command, mm);
+
+        this.plugin = plugin;
     }
 
     /**
@@ -31,9 +36,12 @@ class GCCommand extends Command {
 
         String message = super.mm.getColoredMessage("gc");
 
-        System.gc();
-
-        sender.sendMessage(message);
+        new BukkitRunnable() {
+            public void run() {
+                System.gc();
+                sender.sendMessage(message);
+            }
+        }.runTaskAsynchronously(plugin);
 
         return true;
     }
