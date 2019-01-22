@@ -32,7 +32,16 @@ public class MessagesManager {
         File    configFile  = new File(plugin.getDataFolder(), "messages.yml");
                 config      = YamlConfiguration.loadConfiguration(configFile);
 
-        plugin.saveResource(configFile.getName(), true); // TODO: true to false
+        boolean override = false;
+
+        if (config.isSet("version")) {
+            if (!config.getString("version").equals(plugin.getDescription().getVersion()))
+                override = true;
+        } else {
+            override = true;
+        }
+
+        plugin.saveResource(configFile.getName(), override); // TODO: true to false
 
         reload();
     }
