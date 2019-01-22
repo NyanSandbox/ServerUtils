@@ -106,7 +106,7 @@ public class PlayerCommand extends Command {
         String header = super.mm.getColoredMessage("player.stats.header");
         sender.sendMessage(StringUtils.replaceVariable(header, player.getDisplayName()));
 
-        boolean permissionAll = sender.hasPermission("servertils.player.all");
+        boolean permissionAll = sender.hasPermission("serverutils.player.all");
 
         List<String> executed = new ArrayList<String>();
 
