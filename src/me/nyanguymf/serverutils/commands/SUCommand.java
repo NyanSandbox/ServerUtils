@@ -32,16 +32,20 @@ public class SUCommand implements CommandExecutor {
     private TPSCommand      tps;
     private UptimeCommand   uptime;
     private PlayerCommand   player;
+    private CpuCommand      cpu;
+    private TimeCommand     time;
 
     public SUCommand(ServerUtils plugin, MessagesManager mm) {
         mobs    = new MobsCommand("serverutils.mobs", "su mobs", plugin, mm);
-        gc      = new GCCommand("serverutils.gc", "su gc", mm);
+        gc      = new GCCommand("serverutils.gc", "su gc", plugin, mm);
         world   = new WorldCommand("serverutils.world", "su world", mm);
         tps     = new TPSCommand("serverutils.tps", "su tps", plugin, mm);
         mem     = new MemoryCommand("serverutils.mem", "su memory", mm);
         reload  = new ReloadCommand("serverutils.reload", "su reload", mm);
         uptime  = new UptimeCommand("serverutils.uptime", "su uptime", mm);
         player  = new PlayerCommand("serverutils.player", "su player", mm);
+        cpu     = new CpuCommand("serverutils.cpu", "su cpu", mm);
+        time    = new TimeCommand("serverutils.time", "su time", mm);
     }
 
     /**
@@ -83,6 +87,10 @@ public class SUCommand implements CommandExecutor {
                     gc.execute(sender, permissionAll);
                 else if (command.equalsIgnoreCase("world"))     /* since 1.2 */
                     world.execute(sender, permissionAll, args);
+                else if (command.equalsIgnoreCase("cpu"))       /* since 1.2 */
+                    cpu.execute(sender, permissionAll);
+                else if (command.equalsIgnoreCase("time"))      /* since 1.2 */
+                    time.execute(sender, permissionAll);
                 else if (command.equalsIgnoreCase("uptime"))
                     uptime.execute(sender, permissionAll);
                 else if (command.equalsIgnoreCase("mem")
@@ -109,8 +117,11 @@ public class SUCommand implements CommandExecutor {
 
         tps.execute(sender, permissionAll);
         mobs.execute(sender, permissionAll);
-        gc.execute(sender, permissionAll);
+        world.execute(sender, permissionAll);
         mem.execute(sender, permissionAll);
         uptime.execute(sender, permissionAll);
+        time.execute(sender, permissionAll);
+        cpu.execute(sender, permissionAll);
+        gc.execute(sender, permissionAll);
     }
 }
