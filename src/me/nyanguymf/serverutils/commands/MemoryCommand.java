@@ -36,19 +36,19 @@ class MemoryCommand extends Command {
 
         sender.sendMessage(new String[] {
             StringUtils.replaceVarColored(
-                    super.mm.getMessage("mem-free"),
+                    super.mm.getMessage("memory.free"),
                 String.valueOf(freeMemory)
             ),
             StringUtils.replaceVarColored(
-                    super.mm.getMessage("mem-used"),
+                    super.mm.getMessage("memory.used"),
                 String.valueOf(usedMemory)
             ),
             StringUtils.replaceVarColored(
-                    super.mm.getMessage("mem-total"),
+                    super.mm.getMessage("memory.total"),
                 String.valueOf(availableMemory)
             ),
             StringUtils.replaceVarColored(
-                    super.mm.getMessage("mem-max"),
+                    super.mm.getMessage("memory.max"),
                 String.valueOf(maxMemory)
             )
         });
