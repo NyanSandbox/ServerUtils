@@ -5,7 +5,7 @@ monsters: '&eMonsters: &b{0}&e.'
 animals: '&eAnimals: &b{0}&e.'
 gc: '&eGarbage collector called.'
 world: '&e{0}: &b{1} &echunks&e, &b{2} &eentities.'
-system-time: '&aSystem time: &b{month}&3:&b{day} {hour}&3:&b{min}&3:&b{sec}&e.'
+system-time: '&eSystem time: &b{month}&3:&b{day} {hour}&3:&b{min}&3:&b{sec}&e.'
 uptime: '&eServer uptime:&b {0}&e.'
 
 memory:
