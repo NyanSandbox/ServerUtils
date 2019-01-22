@@ -32,7 +32,8 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
                     "tps", "mobs",
                     "mem", "reload",
                     "gc", "world",
-                    "uptime", "player"
+                    "uptime", "player",
+                    "cpu"
             });
         }
 
