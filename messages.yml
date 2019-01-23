@@ -1,11 +1,11 @@
-version: '1.2'
+version: '1.2.1'
 
 tps: '&eTPS: &b{0}&e.'
 monsters: '&eMonsters: &b{0}&e.'
 animals: '&eAnimals: &b{0}&e.'
 gc: '&eGarbage collector called.'
 world: '&e{0}: &b{1} &echunks&e, &b{2} &eentities.'
-system-time: '&eSystem time: &b{month}&3:&b{day} {hour}&3:&b{min}&3:&b{sec}&e.'
+system-time: '&eSystem time: &b{year}&3-&b{month}&3-&b{day} {hour}&3:&b{min}&3:&b{sec}&3:&b{mill}&e.'
 uptime: '&eServer uptime:&b {0}&e.'
 
 memory:
